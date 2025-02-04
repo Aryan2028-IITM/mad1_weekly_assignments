@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ Webpage }}</title>
+</head>
+<body>
+<div>
+    <h1>{{ title }}</h1>
+</div>
+<div>
+    {% if tp=='student_id' and flag %}
+        <table border="2" id="student-details-table">
+
+            <tr>
+                <th>Student ID</th>
+                <th>Course ID</th>
+                <th>Marks</th>
+            </tr>
+
+
+            {% for lin in data %}
+                {% set lin= lin.split(",") %}
+                {% set id=lin[0]|int %}
+                {% if id == csid %}
+                    <tr>
+                        <td>{{ lin[0] }}</td>
+                        <td>{{ lin[1] }}</td>
+                        <td>{{ lin[2] }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            <tr>
+                <td colspan="2" style="text-align:center"> Total Marks</td>
+                <td>{{ tmarks }}</td>
+            </tr>
+
+        </table>
+        <br>
+        <div>
+            <a href="/">Go Back</a>
+        </div>
+    {% elif tp == 'course_id' and flag %}
+        <table border="2" id="course-details-table">
+
+            <tr>
+                <th>Average Marks</th>
+                <th>Maximum Marks</th>
+            </tr>
+
+
+            <tr>
+                <td>{{ avr }}</td>
+                <td>{{ mx }}</td>
+            </tr>
+
+        </table>
+        <div>
+            <img src="{{ url_for('static', filename='plot.png') }}" alt="Histogram">
+        </div>
+        <br>
+        <div>
+            <a href="/">Go Back</a>
+        </div>
+    {% else %}
+        <p>Something went wrong</p>
+        <br>
+        <div>
+            <a href="/">Go Back</a>
+        </div>
+    {% endif %}
+</div>
+</body>
+</html>
