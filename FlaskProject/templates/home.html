@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset utf-8>
+        <title>Home</title>
+    </head>
+    <body>
+        <div>
+            <h1>
+                Students list
+            </h1>
+        </div>
+        <br>
+        <div>
+            <table id="all-students">
+                <tr>
+                    <th>SNo</th>
+                    <th>Roll Number</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Actions</th>
+                </tr>
+                {% for i in Student %}
+                    <tr>
+                        <td>
+                            {{ i['student_id'] }}
+                        </td>
+                        {% set sid=i['student_id']|int %}
+                        <td>
+                            <a href="/student/{{ sid }}">{{ i['roll_number'] }}</a>
+                        </td>
+                        <td>
+                            {{ i['first_name'] }}
+                        </td>
+                        <td>
+                            {{ i['last_name'] }}
+                        </td>
+                        <td>
+                            <a href="/student/{{ sid }}/update" type="button">Update</a>
+                            <a href="/student/{{ sid }}/delete" type="button">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div>
+            <p>
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href="/student/create">+Add Student</a>
+            </p>
+        </div>
+    </body>
+</html>
